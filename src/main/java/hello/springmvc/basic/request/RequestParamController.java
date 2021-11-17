@@ -70,7 +70,7 @@ public class RequestParamController {
         // 객체형에는 null이 들어갈 수 있다.
         // int 기본형, Integer wrapper 타입(객체형)
         log.info("username ={}, age={} ", username, age);
-        return "ok";
+        return "okz";
     }
 
     @ResponseBody
