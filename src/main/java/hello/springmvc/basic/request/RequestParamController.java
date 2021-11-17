@@ -66,8 +66,8 @@ public class RequestParamController {
             @RequestParam(required = true, defaultValue = "guest") String username,
             @RequestParam(required = false, defaultValue = "-1") int age
     ) {
-        // 기본형에는 null이 못들어간다.
-        // 객체형에는 null이 들어갈 수 있다.
+        // 기본형에는 null이 못들어간다.!
+        // 객체형에는 null이 들어갈 수 있다.!
         // int 기본형, Integer wrapper 타입(객체형)
         log.info("username ={}, age={} ", username, age);
         return "okz";
