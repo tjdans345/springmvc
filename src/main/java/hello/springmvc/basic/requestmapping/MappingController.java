@@ -2,10 +2,8 @@ package hello.springmvc.basic.requestmapping;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class MappingController {
@@ -34,7 +32,7 @@ public class MappingController {
 
     /**
      *
-     * @param data
+     * @param dataR
      * @return String
      */
     @GetMapping("/mapping/{userId}")
@@ -53,5 +51,50 @@ public class MappingController {
         log.info("mappingPath userId={}, orderId={}", userId, orderId);
         return "ok";
     }
+
+    /**
+     * 파라미터로 추가 매핑
+     * params="mode",
+     * params="!mode"
+     * params="mode=debug"
+     * params="mode!=debug" (! = )
+     * params = {"mode=debug","data=good"}
+     */
+    @GetMapping(value = "/mapping-param", params = "mode=debug")
+    public String mappingParam() {
+        log.info("mappingParam");
+        return "ok";
+    }
+
+    @GetMapping(value = "/mapping-param", headers = "mode=debug")
+    public String mappingHeader() {
+        log.info("mappingParam");
+        return "ok";
+    }
+
+    /**
+     * Content-Type 헤더 기반 추가 매핑 Media Type * consumes="application/json"
+     * consumes="!application/json"
+     * consumes="application/*"
+     * consumes="*\/*"
+     * MediaType.APPLICATION_JSON_VALUE
+     */
+    @PostMapping(value = "/mapping-consume", consumes = MediaType.APPLICATION_JSON_VALUE) // 요청 헤더 컨텐트 타입
+    public String mappingConsumes() {
+        log.info("mappingConsumes");
+        return "ok";
+    }
+
+    /**
+     * Accept 헤더 기반 Media Type * produces = "text/html"
+     * produces = "!text/html" * produces = "text/*"
+     * produces = "*\/*"
+     */
+    @PostMapping(value = "/mapping-produce", produces = "text/html") // 요청 헤더 어셉트 타입
+    public String mappingProduces() {
+        log.info("mappingProduces");
+        return "ok";
+    }
+
 
 }

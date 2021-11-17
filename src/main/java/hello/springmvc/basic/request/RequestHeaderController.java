@@ -34,9 +34,9 @@ public class RequestHeaderController {
                           HttpMethod httpMethod,
                           // locale -> 언어정보
                           Locale locale,
-                          //MultiValueMap -> 하나의 키에 여러값을 받을 수 있다.
+                          //MultiValueMap -> 하나의 키에 여러값을 받을 수 있다. -> 모든 값을 다 받는다.
                           @RequestHeader MultiValueMap<String, String> headerMap,
-                          @RequestHeader("host") String host,
+                          @RequestHeader("host") String host, // 단일 값만 받고싶을 때
                           @CookieValue(value = "myCookie", required = false) String cookie) {
 
         log.info("request={}", request);
