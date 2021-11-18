@@ -1,11 +1,9 @@
 package hello.springmvc.basic.request;
 
+import hello.springmvc.basic.HelloData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -84,6 +82,24 @@ public class RequestParamController {
         // 객체형에는 null이 들어갈 수 있다.
         // int 기본형, Integer wrapper 타입(객체형)
         log.info("username ={}, age={} ", paramMap.get("username") , paramMap.get("age"));
+        return "ok";
+    }
+
+    @ResponseBody
+    @RequestMapping("/model-attribute-v1")
+    public String modelAttributeV1(@ModelAttribute HelloData helloData) {
+        // ModelAttribute -> 객체로 받아 올 수 있는 역할
+        // 객체를 찍었을 때 스트링으로 바꿔주는 역할 .toString()
+        // 예외 처리가 중요하다.
+        return "ok";
+    }
+
+    @ResponseBody
+    @RequestMapping("/model-attribute-v2")
+    public String modelAttributeV2(HelloData helloData) {
+        log.info("modelAttributeV2 username={}, age={} " + helloData.getUsername(), helloData.getAge());
+        // 객체를 찍었을 때 스트링으로 바꿔주는 역할 .toString()
+        // 예외 처리가 중요하다.
         return "ok";
     }
 
